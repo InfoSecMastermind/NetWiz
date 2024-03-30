@@ -28,6 +28,7 @@ To install NetWiz, simply download the `netwiz.sh` script and make it executable
 
 ```bash
 git clone https://github.com/InfoSecMastermind/netwiz.git
+cd netwiz
 chmod +x netwiz.sh
 ```
 
