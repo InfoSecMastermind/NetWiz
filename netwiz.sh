@@ -1,6 +1,13 @@
 #!/bin/bash
 
-# NetWiz: All neccesary Network Configuration In One Place
+# NetWiz
+
+# Disclaimer: This script is provided for educational and informational purposes only. 
+# The author holds no responsibility or liability for any misuse of this script. 
+# Usage of this script is solely at the user's own risk. 
+# By using this script, you acknowledge that there is no warranty or guarantee of any kind.
+
+
 # Function to display menu
 
 display_menu() {
@@ -13,9 +20,10 @@ display_menu() {
     echo " | |\  |  __/ |_ \  /\  /  | |/ / "
     echo " |_| \_|\___|\__| \/  \/   |_/___| "
     echo
-    echo -e "\e[2m\e[33mNetWiz: All Necessary Network Configuration In One Place\e[0m"  # Dim yellow color
+    echo -e "\e[2m\e[33mNetWiz: All Neccesary Network Configuration And Management Unified\e[0m"  # Dim yellow color
     echo "------------------------------------------------------------------"
-        echo -e " \e[1;33m1.\e[0m View/Edit Network Interfaces Configuration"
+    echo
+    echo -e " \e[1;33m1.\e[0m View/Edit Network Interfaces Configuration"
     echo -e " \e[1;33m2.\e[0m Manage DNS Configuration"
     echo -e " \e[1;33m3.\e[0m Manage Hostname Resolution"
     echo -e " \e[1;33m4.\e[0m Set System Hostname"
@@ -30,7 +38,7 @@ display_menu() {
     echo -e " \e[1;33m13.\e[0m Query Network Status (nmcli)"
     echo -e " \e[1;33m14.\e[0m Scan for Wi-Fi Networks (nmcli)"
     echo -e " \e[1;33m15.\e[0m Manage Ports"
-    echo -e " \e[1;33m16.\e[0m Network Mapping Scan (NMAP)"
+    echo -e " \e[1;33m16.\e[0m Network Mapping & Scan (NMAP)"
     echo -e " \e[1;33m17.\e[0m Exit"
     echo
 }
@@ -285,11 +293,10 @@ manage_ports() {
     read -p "Press Enter to continue"
 }
 
-# 16 Function to perform automatic network scanning using Nmap
-# Function to perform automatic network scanning using Nmap
+# 16 Function to perform automatic network scanning (1000 ports) using Nmap 
 network_scan_auto() {
     clear
-    echo "Running automatic Nmap scan on your local network..."
+    echo "Running automatic Nmap scan..." 
     echo
 
     # Check if Nmap is installed
@@ -300,17 +307,85 @@ network_scan_auto() {
         echo
     fi
 
-    # Determine the IP address of the system
-    local ip_address=$(hostname -I | cut -d' ' -f1)
+    # Check if curl is installed
+    if ! command -v curl &> /dev/null; then
+        echo "curl is not installed. Installing it now..."
+        sudo apt-get update
+        sudo apt-get install -y curl
+        echo
+    fi
 
-    # Perform network scan using Nmap
-    echo "Your IP address: $ip_address"
-    echo "Scanning network..."
-    echo "Please Wait, This can take quite some time."
-    sudo nmap -v -sS -A -T5 "$ip_address"/24  # Automatically determine subnet from IP address
+    # Ask the user for the scan option
+    echo "Select scan option:"
+    echo "-------------------"
+    echo "1. Scan public IP address"
+    echo "2. Scan local network"
+    echo "3. Scan both"
     echo
+    read -p "Enter your choice: " option
+    echo
+
+    # Determine the public IP address of the system
+    local public_ip=$(curl -s ifconfig.me)
+
+    case $option in
+        1)
+            # Perform network scan on the public IP address
+            echo "Your public IP address: $public_ip"
+            echo
+            echo "Scanning public IP address..."
+            echo
+            echo "Please Wait, This can take quite some time."
+            echo
+            sudo nmap -v -A -sS -T5 "$public_ip"  # Scan the public IP address
+            ;;
+        2)
+            # Determine the local IP address of the system
+            local local_ip=$(hostname -I | cut -d' ' -f1)
+
+            # Perform network scan on the local network
+            echo "Your local IP address: $local_ip"
+            echo
+            echo "Scanning local network..."
+            echo
+            echo "Please Wait, This can take quite some time."
+            echo
+            sudo nmap -v -A -sS -T5 "$local_ip"/24  # Fast scan of the subnet
+            ;;
+        3)
+            # Perform network scan on the public IP address
+            echo "Your public IP address: $public_ip"
+            echo
+            echo "Scanning public IP address..."
+            echo
+            echo "Please Wait, This can take quite some time."
+            echo
+            sudo nmap -v -A -sS -T5 "$public_ip"  # Scan the public IP address
+            echo
+            echo
+            echo
+
+            # Determine the local IP address of the system
+            local local_ip=$(hostname -I | cut -d' ' -f1)
+
+            # Perform network scan on the local network
+            echo "Your local IP address: $local_ip"
+            echo
+            echo "Scanning local network..."
+            echo
+            echo "Please Wait, This can take quite some time."
+            echo
+            sudo nmap -v -A -sS -T5 "$local_ip"/24  # Fast scan of the subnet
+            ;;
+        *)
+            echo "Invalid option. Exiting..."
+            return
+            ;;
+    esac
+
     read -p "Press Enter to return to the main menu..."
 }
+
 
 
 
