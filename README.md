@@ -20,6 +20,7 @@ And it is inspired from The Lazy Script.
 - Query Network Status (nmcli)
 - Scan for Wi-Fi Networks (nmcli)
 - Manage Ports
+- Automatic NMAP scan
 - And more...
 
 ## Installation
