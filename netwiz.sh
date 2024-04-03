@@ -30,7 +30,8 @@ display_menu() {
     echo -e " \e[1;33m13.\e[0m Query Network Status (nmcli)"
     echo -e " \e[1;33m14.\e[0m Scan for Wi-Fi Networks (nmcli)"
     echo -e " \e[1;33m15.\e[0m Manage Ports"
-    echo -e " \e[1;33m16.\e[0m Exit"
+    echo -e " \e[1;33m16.\e[0m Network Mapping Scan (NMAP)"
+    echo -e " \e[1;33m17.\e[0m Exit"
     echo
 }
 
@@ -284,6 +285,34 @@ manage_ports() {
     read -p "Press Enter to continue"
 }
 
+# 16 Function to perform automatic network scanning using Nmap
+# Function to perform automatic network scanning using Nmap
+network_scan_auto() {
+    clear
+    echo "Running automatic Nmap scan on your local network..."
+    echo
+
+    # Check if Nmap is installed
+    if ! command -v nmap &> /dev/null; then
+        echo "Nmap is not installed. Installing it now..."
+        sudo apt-get update
+        sudo apt-get install -y nmap
+        echo
+    fi
+
+    # Determine the IP address of the system
+    local ip_address=$(hostname -I | cut -d' ' -f1)
+
+    # Perform network scan using Nmap
+    echo "Your IP address: $ip_address"
+    echo "Scanning network..."
+    echo "Please Wait, This can take quite some time."
+    sudo nmap -v -sS -A -T5 "$ip_address"/24  # Automatically determine subnet from IP address
+    echo
+    read -p "Press Enter to return to the main menu..."
+}
+
+
 
 
 # Main script
@@ -306,7 +335,8 @@ while true; do
         13) query_network_status ;;
         14) scan_wifi_networks ;;
         15) manage_ports ;;
-        16) echo "Exiting..."; exit ;;
+        16) network_scan_auto ;;
+        17) echo "Exiting..."; exit ;;
         *) echo "Invalid choice. Please try again." ;;
     esac
 done
