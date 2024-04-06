@@ -22,7 +22,7 @@ NetWiz is a command-line tool designed to serve as an all-in-one network configu
 - Scan for Wi-Fi Networks (nmcli)
 - Manage Ports
 - Automatic NMAP scan
-- And more...
+- And more coming...
 
 ## Installation
 
