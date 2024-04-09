@@ -47,6 +47,8 @@ NetWiz requires the following dependencies:
 - Bash shell
 - nmcli (NetworkManager command-line interface)
 - iptables (if managing firewall configuration)
+- nmap (will be automatically installed if not in system)
+- curl (will be automatically installed if not in system)
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvement, please feel free to open an issue or submit a pull request.
