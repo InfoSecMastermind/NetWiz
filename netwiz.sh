@@ -51,7 +51,7 @@ display_menu() {
 # 1 Function to view/edit network interfaces configuration
 view_edit_interfaces() {
     echo "View/Edit Network Interfaces Configuration"
-    echo "-----------------------------------------"
+    echo "------------------------------------------"
     echo "1. View Network Interfaces Configuration"
     echo "2. Edit Network Interfaces Configuration"
     read -p "Enter your choice: " choice
@@ -113,7 +113,7 @@ set_system_hostname() {
 # 5 Function to configure Name Service Switch
 configure_nsswitch() {
     echo "Configure Name Service Switch"
-    echo "------------------------------"
+    echo "-----------------------------"
     echo "Editing /etc/nsswitch.conf..."
     nano /etc/nsswitch.conf  # Use nano or any other text editor of your choice
     echo "Name Service Switch configuration updated."
@@ -125,7 +125,7 @@ configure_nsswitch() {
 # 6 Function to configure NetworkManager
 configure_networkmanager() {
     echo "Configure NetworkManager"
-    echo "-------------------------"
+    echo "------------------------"
     echo "Editing /etc/NetworkManager/NetworkManager.conf..."
     nano /etc/NetworkManager/NetworkManager.conf  # Use nano or any other text editor of your choice
     echo "NetworkManager configuration updated."
@@ -150,7 +150,7 @@ modify_kernel_parameters() {
 # 8 Function to manage iptables firewall configuration
 manage_iptables() {
     echo "Manage iptables Firewall Configuration"
-    echo "-------------------------------------"
+    echo "--------------------------------------"
     echo "1. View iptables Configuration"
     echo "2. Add New iptables Rule"
     echo "3. Remove iptables Rule"
@@ -174,7 +174,7 @@ manage_iptables() {
 # 9 Function to control network service access
 control_network_service_access() {
     echo "Control Network Service Access"
-    echo "-------------------------------"
+    echo "------------------------------"
     echo "Editing /etc/hosts.allow and /etc/hosts.deny..."
     echo "1. Edit hosts.allow"
     echo "2. Edit hosts.deny"
@@ -193,7 +193,7 @@ control_network_service_access() {
 # 10 Function to handle specific interface hostnames
 handle_interface_hostnames() {
     echo "Handle Specific Interface Hostnames"
-    echo "------------------------------------"
+    echo "-----------------------------------"
     echo "Checking for interface-specific hostname files..."
     
     # Check for interface-specific hostname files
@@ -224,7 +224,7 @@ handle_interface_hostnames() {
 # 11 Function to view/edit network connections using nmcli
 view_edit_connections() {
     echo "View/Edit Network Connections (nmcli)"
-    echo "--------------------------------------"
+    echo "-------------------------------------"
     nmcli connection show
     echo "Enter the connection name to edit:"
     read connection_name
@@ -236,7 +236,7 @@ view_edit_connections() {
 # 12 Function to deactivate connections using nmcli
 deactivate_connections() {
     echo "Deactivate Connections (nmcli)"
-    echo "--------------------------------"
+    echo "------------------------------"
     
     # List active connections
     echo "Active connections:"
@@ -257,7 +257,7 @@ deactivate_connections() {
 # 13 Function to query network status using nmcli
 query_network_status() {
     echo "Query Network Status (nmcli)"
-    echo "------------------------------"
+    echo "----------------------------"
     nmcli device show
     read -p "Press Enter to continue"
 }
@@ -266,7 +266,7 @@ query_network_status() {
 # 14 Function to scan for Wi-Fi networks using nmcli
 scan_wifi_networks() {
     echo "Scan for Wi-Fi Networks (nmcli)"
-    echo "--------------------------------"
+    echo "-------------------------------"
     nmcli device wifi list
     read -p "Press Enter to continue"
 }
