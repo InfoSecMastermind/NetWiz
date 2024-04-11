@@ -39,10 +39,10 @@ display_menu() {
     echo -e " \e[1;33m14.\e[0m Scan for Wi-Fi Networks (nmcli)"
     echo -e " \e[1;33m15.\e[0m Manage Ports"
     echo -e " \e[1;33m16.\e[0m Network Mapping & Scan (NMAP)"
-    echo -e " \e[1;33m17.\e[0m Exit"
+    echo -e " \e[1;33m17.\e[0m Generate Network Diagram (Graphwiz)"
+    echo -e " \e[1;33m18.\e[0m Exit"
     echo
 }
-
 
 
 
@@ -425,6 +425,65 @@ network_scan_auto() {
     read -p "Press Enter to return to the main menu..."
 }
 
+# 17 Function to generate net topology diagram using nmcli and Graphviz 
+
+generate_network_diagram() {
+    echo "Generating Network Diagram..."
+
+    # Check if nmcli is installed
+    if ! command -v nmcli &> /dev/null; then
+        echo "nmcli is not installed. Installing..."
+        sudo apt install network-manager -y
+    fi
+
+    # Check if Graphviz is installed
+    if ! command -v dot &> /dev/null; then
+        echo "Graphviz is not installed. Installing..."
+        sudo apt install graphviz -y
+    fi
+
+    # Automatically collect network information using nmcli
+    devices=($(nmcli device | awk 'NR > 1 && /^[^\s]/ {print $1}'))
+
+    connections=()
+    for device in "${devices[@]}"; do
+        if [ -n "$device" ]; then
+            inet_addr=$(nmcli device show $device | awk '/IP4.ADDRESS\[1\]/ {print $2}')
+            mac_addr=$(nmcli device show $device | awk '/GENERAL.HWADDR/ {print $2}')
+            device_type=$(nmcli device show $device | awk '/GENERAL.TYPE/ {print $2}')
+            mtu=$(nmcli device show $device | awk '/GENERAL.MTU/ {print $2}')
+            connections+=("\"$device [Type: $device_type\nMTU: $mtu\ninet addr: ${inet_addr:-N/A}\nMAC addr: ${mac_addr:-N/A}]\"")
+            device_connections=($(nmcli device show $device | awk '/CONNECTIONS/ {print $2}' | tr ',' '\n'))
+            for connection in "${device_connections[@]}"; do
+                connections+=("\"$device [Type: $device_type\nMTU: $mtu\ninet addr: ${inet_addr:-N/A}\nMAC addr: ${mac_addr:-N/A}]\" -> \"$connection\"")
+            done
+        fi
+    done
+
+    # Create a Graphviz DOT file to describe the network topology
+    cat << EOF > network_topology.dot
+digraph NetworkTopology {
+    // Define nodes
+    $(for device in "${devices[@]}"; do
+        inet_addr=$(nmcli device show $device | awk '/IP4.ADDRESS\[1\]/ {print $2}')
+        mac_addr=$(nmcli device show $device | awk '/GENERAL.HWADDR/ {print $2}')
+        device_type=$(nmcli device show $device | awk '/GENERAL.TYPE/ {print $2}')
+        mtu=$(nmcli device show $device | awk '/GENERAL.MTU/ {print $2}')
+        echo "    \"$device [Type: $device_type\nMTU: $mtu\ninet addr: ${inet_addr:-N/A}\nMAC addr: ${mac_addr:-N/A}]\";"
+    done)
+
+    // Define edges (connections)
+    $(for connection in "${connections[@]}"; do echo "    $connection;"; done)
+}
+EOF
+
+    # Generate the network diagram using Graphviz
+    dot -Tpng network_topology.dot -o network_topology.png
+
+    echo "Network diagram generated: network_topology.png"
+
+    read -p "Press Enter to continue"
+}
 
 
 
@@ -450,8 +509,8 @@ while true; do
         14) scan_wifi_networks ;;
         15) manage_ports ;;
         16) network_scan_auto ;;
-        17) echo "Exiting..."; exit ;;
+        17) generate_network_diagram ;;
+        18) echo "Exiting..."; exit ;;
         *) echo "Invalid choice. Please try again." ;;
     esac
 done
-
