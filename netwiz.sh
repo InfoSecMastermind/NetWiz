@@ -50,6 +50,13 @@ display_menu() {
 
 # 1 Function to view/edit network interfaces configuration
 view_edit_interfaces() {
+
+ # Check if nmcli is installed
+    if ! command -v nmcli &> /dev/null; then
+        echo "nmcli is not installed. Installing..."
+        sudo apt install network-manager -y
+    fi
+
     echo "View/Edit Network Interfaces Configuration"
     echo "------------------------------------------"
     echo "1. View Network Interfaces Configuration"
@@ -223,6 +230,14 @@ handle_interface_hostnames() {
 
 # 11 Function to view/edit network connections using nmcli
 view_edit_connections() {
+
+ # Check if nmcli is installed
+    if ! command -v nmcli &> /dev/null; then
+        echo "nmcli is not installed. Installing..."
+        sudo apt install network-manager -y
+    fi
+
+
     echo "View/Edit Network Connections (nmcli)"
     echo "-------------------------------------"
     nmcli connection show
@@ -235,6 +250,13 @@ view_edit_connections() {
 
 # 12 Function to deactivate connections using nmcli
 deactivate_connections() {
+
+ # Check if nmcli is installed
+    if ! command -v nmcli &> /dev/null; then
+        echo "nmcli is not installed. Installing..."
+        sudo apt install network-manager -y
+    fi
+
     echo "Deactivate Connections (nmcli)"
     echo "------------------------------"
     
@@ -256,6 +278,13 @@ deactivate_connections() {
 
 # 13 Function to query network status using nmcli
 query_network_status() {
+
+ # Check if nmcli is installed
+    if ! command -v nmcli &> /dev/null; then
+        echo "nmcli is not installed. Installing..."
+        sudo apt install network-manager -y
+    fi
+
     echo "Query Network Status (nmcli)"
     echo "----------------------------"
     nmcli device show
@@ -265,11 +294,19 @@ query_network_status() {
 
 # 14 Function to scan for Wi-Fi networks using nmcli
 scan_wifi_networks() {
+
+ # Check if nmcli is installed
+    if ! command -v nmcli &> /dev/null; then
+        echo "nmcli is not installed. Installing..."
+        sudo apt install network-manager -y
+    fi
+
     echo "Scan for Wi-Fi Networks (nmcli)"
     echo "-------------------------------"
     nmcli device wifi list
     read -p "Press Enter to continue"
 }
+
 
 
 # 15 Function to manage ports
@@ -292,6 +329,8 @@ manage_ports() {
     esac
     read -p "Press Enter to continue"
 }
+
+
 
 # 16 Function to perform automatic network scanning (1000 ports) using Nmap 
 network_scan_auto() {
