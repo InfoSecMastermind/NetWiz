@@ -1,6 +1,6 @@
 # NetWiz
 
-NetWiz is a command-line tool designed to serve as an all-in-one network configuration assistant for Linux systems. It offers a convenient interface for managing various network settings and configurations from a single location, inspired by The Lazy Script.
+NetWiz is a command-line tool designed to serve as an all-in-one network configuration assistant for Debian Linux systems (like Ubuntu, Kali linux etc). It offers a convenient interface for managing various network settings and configurations from a single location, it is inspired by The Lazy Script.
 
 **Disclaimer:** This script is provided for educational and informational purposes only. The author holds no responsibility or liability for any misuse of this script. Usage of this script is solely at the user's own risk. By using this script, you acknowledge that there is no warranty or guarantee of any kind. It is important to exercise caution and discretion when utilizing this script, and users are encouraged to understand the implications of their actions. 
 
@@ -22,6 +22,7 @@ NetWiz is a command-line tool designed to serve as an all-in-one network configu
 - Scan for Wi-Fi Networks (nmcli)
 - Manage Ports
 - Automatic NMAP scan
+- Network Diagram Generation
 - And more coming...
 
 ## Installation
@@ -39,16 +40,17 @@ Run the script with:
 ```bash
 sudo ./netwiz.sh
 ```
-Follow the on-screen menu to select and perform various network configuration tasks.
+Follow the on-screen menu to select and perform various network configuration and management tasks.
 
 ## Dependencies
-NetWiz requires the following dependencies:
+Some NetWiz functions require the following dependencies:
 
 - Bash shell
-- nmcli (NetworkManager command-line interface)
+- nmcli (will be automatically installed if not in system)
 - iptables (if managing firewall configuration)
 - nmap (will be automatically installed if not in system)
 - curl (will be automatically installed if not in system)
+- Graphviz (will be automatically installed if not in system)
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvement, please feel free to open an issue or submit a pull request.
