@@ -4,6 +4,9 @@ NetWiz is a command-line tool designed to serve as an all-in-one network configu
 
 **Disclaimer:** This script is provided for educational and informational purposes only. The author holds no responsibility or liability for any misuse of this script. Usage of this script is solely at the user's own risk. By using this script, you acknowledge that there is no warranty or guarantee of any kind. It is important to exercise caution and discretion when utilizing this script, and users are encouraged to understand the implications of their actions. 
 
+![image](https://github.com/InfoSecMastermind/NetWiz/assets/144629287/f9cec5a9-51f8-4fac-9c92-e65161bf2a48)
+
+
 ## Features
 
 - View/Edit Network Interfaces Configuration
