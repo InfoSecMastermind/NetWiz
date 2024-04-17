@@ -56,9 +56,9 @@ Some NetWiz functions require the following dependencies:
 - Graphviz (will be automatically installed if not in system)
 
 ## Contributing
-Contributions are welcome! If you find any issues or have suggestions for improvement, please feel free to open an issue or submit a pull request.
+If you would like to contribute to the project, please fork the repository, make your changes, and submit a pull request. And if you find any issues or have suggestions for improvement, please feel free to open an issue or submit a pull request. Contributions are welcome! 
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.
 
-Feel free to customize this README file further based on your project's specifics and req
+Feel free to customize this README file further based on your project's specifics and requirements.
