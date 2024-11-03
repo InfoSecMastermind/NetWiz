@@ -26,6 +26,7 @@ NetWiz is a command-line tool designed to serve as an all-in-one network configu
 - Manage Ports
 - Automatic NMAP scan
 - Network Diagram Generation
+- Network Speed Testing
 - And more coming...
 
 ## Installation
@@ -54,6 +55,7 @@ Some NetWiz functions require the following dependencies:
 - nmap (will be automatically installed if not in system)
 - curl (will be automatically installed if not in system)
 - Graphviz (will be automatically installed if not in system)
+- speedtest-cli (will be automatically installed if not in system)
 
 ## Contributing
 If you would like to contribute to the project, please fork the repository, make your changes, and submit a pull request. And if you find any issues or have suggestions for improvement, please feel free to open an issue or submit a pull request. Contributions are welcome! 
