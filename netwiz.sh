@@ -40,7 +40,8 @@ display_menu() {
     echo -e " \e[1;33m15.\e[0m Manage Ports"
     echo -e " \e[1;33m16.\e[0m Network Mapping & Scan (NMAP)"
     echo -e " \e[1;33m17.\e[0m Generate Network Diagram (Graphwiz)"
-    echo -e " \e[1;33m18.\e[0m Exit"
+    echo -e " \e[1;33m18.\e[0m Network Speed Testing"
+    echo -e " \e[1;33m19.\e[0m Exit"
     echo
 }
 
@@ -425,8 +426,16 @@ network_scan_auto() {
     read -p "Press Enter to return to the main menu..."
 }
 
-# 17 Function to generate net topology diagram using nmcli and Graphviz 
-
+speedtest_network() {
+       if ! command -v speedtest &> /dev/null; then
+          echo "Installing speedtest-cli..."
+          sudo apt-get install -y speedtest-cli
+      fi
+      speedtest
+      read -p "Press Enter to continue"
+   }
+   
+# 17 Function to generate net topology diagram using nmcli and Graphviz    
 generate_network_diagram() {
     echo "Generating Network Diagram..."
 
@@ -485,6 +494,7 @@ EOF
     read -p "Press Enter to continue"
 }
 
+  
 
 
 
@@ -510,7 +520,8 @@ while true; do
         15) manage_ports ;;
         16) network_scan_auto ;;
         17) generate_network_diagram ;;
-        18) echo "Exiting..."; exit ;;
+        18) speedtest_network ;;
+        19) echo "Exiting..."; exit ;;
         *) echo "Invalid choice. Please try again." ;;
     esac
 done
