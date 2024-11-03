@@ -426,6 +426,7 @@ network_scan_auto() {
     read -p "Press Enter to return to the main menu..."
 }
 
+# 18 To test the upload and download speeds of the current internet connection
 speedtest_network() {
        if ! command -v speedtest &> /dev/null; then
           echo "Installing speedtest-cli..."
