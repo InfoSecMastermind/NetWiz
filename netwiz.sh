@@ -41,7 +41,8 @@ display_menu() {
     echo -e " \e[1;33m16.\e[0m Network Mapping & Scan (NMAP)"
     echo -e " \e[1;33m17.\e[0m Generate Network Diagram (Graphwiz)"
     echo -e " \e[1;33m18.\e[0m Network Speed Testing"
-    echo -e " \e[1;33m19.\e[0m Exit"
+    echo -e " \e[1;33m19.\e[0m Ping Test"
+    echo -e " \e[1;33m20.\e[0m Exit"
     echo
 }
 
@@ -436,7 +437,7 @@ speedtest_network() {
       read -p "Press Enter to continue"
    }
 
-#19 
+#19 Connection Quality Check
 
 ping_test() {
     echo "Ping Test to Google DNS..."
@@ -531,6 +532,7 @@ while true; do
         16) network_scan_auto ;;
         17) generate_network_diagram ;;
         18) speedtest_network ;;
+        19) ping_test ;;
         19) echo "Exiting..."; exit ;;
         *) echo "Invalid choice. Please try again." ;;
     esac
