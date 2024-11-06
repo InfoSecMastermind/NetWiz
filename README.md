@@ -27,6 +27,7 @@ NetWiz is a command-line tool designed to serve as an all-in-one network configu
 - Automatic NMAP scan
 - Network Diagram Generation
 - Network Speed Testing
+- Connection Quality Check
 - And more coming...
 
 ## Installation
