@@ -435,6 +435,15 @@ speedtest_network() {
       speedtest
       read -p "Press Enter to continue"
    }
+
+#19 
+
+ping_test() {
+    echo "Ping Test to Google DNS..."
+    ping -c 5 8.8.8.8
+    echo
+    read -p "Press Enter to continue"
+}
    
 # 17 Function to generate net topology diagram using nmcli and Graphviz    
 generate_network_diagram() {
