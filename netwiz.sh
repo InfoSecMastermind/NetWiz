@@ -443,13 +443,13 @@ ping_and_latency_test() {
     echo "Ping and Latency Test to Google DNS"
     echo "-----------------------------------"
     
-    # Perform the ping test to Google DNS
+    # Perform the ping test to Google DNS and capture output
     echo "Pinging Google DNS (8.8.8.8)..."
     ping_output=$(ping -c 4 8.8.8.8)
     echo "$ping_output"
     
-    # Extract the average latency using awk from the ping statistics line
-    avg_latency=$(echo "$ping_output" | awk -F'/' 'END {print $2}')
+    # Extract the average latency using grep and awk
+    avg_latency=$(echo "$ping_output" | grep -oP 'round-trip min/avg/max/stddev = \K[\d.]+')
     
     # Check if we were able to extract the average latency
     if [ -n "$avg_latency" ]; then
