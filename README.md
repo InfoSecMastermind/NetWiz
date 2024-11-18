@@ -4,7 +4,7 @@ NetWiz is a command-line tool designed to serve as an all-in-one network configu
 
 **Disclaimer:** This script is provided for educational and informational purposes only. The author holds no responsibility or liability for any misuse of this script. Usage of this script is solely at the user's own risk. By using this script, you acknowledge that there is no warranty or guarantee of any kind. It is important to exercise caution and discretion when utilizing this script, and users are encouraged to understand the implications of their actions. 
 
-![image](https://github.com/user-attachments/assets/8970a21f-5df0-4a68-80c3-46e786e5677f)
+![Screenshot 2024-11-19 001425](https://github.com/user-attachments/assets/ee0a36d2-5788-485c-989a-d3209381cdd5)
 
 
 ## Features
