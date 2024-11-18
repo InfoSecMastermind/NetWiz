@@ -546,7 +546,7 @@ while true; do
         17) generate_network_diagram ;;
         18) speedtest_network ;;
         19) ping_and_latency_test ;;
-        19) echo "Exiting..."; exit ;;
+        20) echo "Exiting..."; exit ;;
         *) echo "Invalid choice. Please try again." ;;
     esac
 done
