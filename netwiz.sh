@@ -445,14 +445,14 @@ ping_and_latency_test() {
     
     # Perform the ping test to Google DNS
     echo "Pinging Google DNS (8.8.8.8)..."
-    ping -c 4 8.8.8.8
-
-    # Perform the latency test (round-trip time)
-    echo "Performing latency test to Google DNS (8.8.8.8)..."
-    latency=$(ping -c 1 8.8.8.8 | awk -F'=' '/time=/ {print $4}' | cut -d' ' -f1)
+    ping_output=$(ping -c 4 8.8.8.8)
+    echo "$ping_output"
     
-    if [ -n "$latency" ]; then
-        echo "Latency to Google DNS (8.8.8.8): $latency ms"
+    # Extract the average latency (from the output of the ping command)
+    avg_latency=$(echo "$ping_output" | grep "rtt" | awk -F'/' '{print $5}')
+    
+    if [ -n "$avg_latency" ]; then
+        echo "Average latency to Google DNS (8.8.8.8): $avg_latency ms"
     else
         echo "Unable to determine latency to Google DNS."
     fi
