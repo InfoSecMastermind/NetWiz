@@ -449,7 +449,7 @@ ping_and_latency_test() {
     echo "$ping_output"
     
     # Extract the average latency (from the output of the ping command)
-    avg_latency=$(echo "$ping_output" | grep -oP 'rtt min/avg/max/mdev = \K[\d.]+')
+     avg_latency=$(echo "$ping_output" | grep -oP 'rtt min/avg/max/stddev = [^ ]+' | awk -F '=' '{print $2}' | awk '{print $2}')
     
     if [ -n "$avg_latency" ]; then
         echo "Average latency to Google DNS (8.8.8.8): $avg_latency ms"
