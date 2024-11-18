@@ -444,18 +444,18 @@ ping_and_latency_test() {
     echo "-----------------------------------"
     
     # Perform the ping test to Google DNS
-    echo "Pinging Google DNS (8.8.8.8)..."
-    ping_output=$(ping -c 4 8.8.8.8)
-    echo "$ping_output"
+    ping_output=$(ping -c 4 8.8.8.8 | tail -n 5)  # Capture only the last 5 lines of output (ping summary)
     
-    # Extract the average latency (from the output of the ping command)
-     avg_latency=$(echo "$ping_output" | grep -oP 'rtt min/avg/max/stddev = [^ ]+' | awk -F '=' '{print $2}' | awk '{print $2}')
+    # Extract the average latency from the ping statistics line
+    avg_latency=$(echo "$ping_output" | grep -oP 'rtt min/avg/max/stddev = \K[0-9.]+')
     
+    # Check if we were able to extract the average latency
     if [ -n "$avg_latency" ]; then
         echo "Average latency to Google DNS (8.8.8.8): $avg_latency ms"
     else
         echo "Unable to determine latency to Google DNS."
     fi
+    
     read -p "Press Enter to continue"
 }
    
