@@ -41,7 +41,7 @@ display_menu() {
     echo -e " \e[1;33m16.\e[0m Network Mapping & Scan (NMAP)"
     echo -e " \e[1;33m17.\e[0m Generate Network Diagram (Graphwiz)"
     echo -e " \e[1;33m18.\e[0m Network Speed Testing"
-    echo -e " \e[1;33m19.\e[0m Ping Test"
+    echo -e " \e[1;33m19.\e[0m Ping and Latency Test"
     echo -e " \e[1;33m20.\e[0m Exit"
     echo
 }
@@ -439,10 +439,23 @@ speedtest_network() {
 
 #19 Connection Quality Check
 
-ping_test() {
-    echo "Ping Test to Google DNS..."
-    ping -c 5 8.8.8.8
-    echo
+ping_and_latency_test() {
+    echo "Ping and Latency Test to Google DNS"
+    echo "-----------------------------------"
+    
+    # Perform the ping test to Google DNS
+    echo "Pinging Google DNS (8.8.8.8)..."
+    ping -c 4 8.8.8.8
+
+    # Perform the latency test (round-trip time)
+    echo "Performing latency test to Google DNS (8.8.8.8)..."
+    latency=$(ping -c 1 8.8.8.8 | awk -F'=' '/time=/ {print $4}' | cut -d' ' -f1)
+    
+    if [ -n "$latency" ]; then
+        echo "Latency to Google DNS (8.8.8.8): $latency ms"
+    else
+        echo "Unable to determine latency to Google DNS."
+    fi
     read -p "Press Enter to continue"
 }
    
@@ -532,7 +545,7 @@ while true; do
         16) network_scan_auto ;;
         17) generate_network_diagram ;;
         18) speedtest_network ;;
-        19) ping_test ;;
+        19) ping_and_latency_test ;;
         19) echo "Exiting..."; exit ;;
         *) echo "Invalid choice. Please try again." ;;
     esac
